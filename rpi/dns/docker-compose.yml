@@ -1,11 +1,12 @@
-version: '2'
+version: '3'
 services:
   dns:
     restart: always
-    image: strm/dnsmasq
+    image: easypi/dnsmasq-arm:latest
     volumes:
-      - ./dnsmasq.conf:/etc/dnsmasq.conf
+      - /config/dns/dnsmasq.conf:/etc/dnsmasq.conf
     ports:
       - "53:53/udp"
+      - "53:53/tcp"
     cap_add:
       - NET_ADMIN
