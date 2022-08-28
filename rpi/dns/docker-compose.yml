@@ -5,6 +5,7 @@ services:
     image: easypi/dnsmasq-arm:latest
     volumes:
       - /config/dns/dnsmasq.conf:/etc/dnsmasq.conf
+      - /config/dns/hosts:/etc/hosts
     ports:
       - "53:53/udp"
       - "53:53/tcp"
