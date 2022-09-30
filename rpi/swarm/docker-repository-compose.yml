@@ -24,5 +24,4 @@ services:
       - NO_SSL_VERIFICATION=true
       - DOCKER_REGISTRY_URL=http://registry:5000
     depends_on:
-      registry:
-        condition: service_started
+      - registry
