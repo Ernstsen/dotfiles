@@ -1,0 +1,28 @@
+version: '3.9'
+
+# from https://docs.docker.com/registry/deploying/
+
+services:
+  registry:
+    container_name: docker_registry
+    restart: always
+    image: registry:2
+    ports:
+      - 5000:5000
+    volumes:
+      - /config/docker-registry/data:/var/lib/registry
+      - /config/docker-registry/certs:/certs
+      - /config/docker-registry/auth:/auth
+  registry-browser:
+    container_name: docker_registry_browser
+    restart: always
+    image: klausmeyer/docker-registry-browser
+    ports:
+      - 8081:8080
+    environment:
+      - ENABLE_DELETE_IMAGES=true
+      - NO_SSL_VERIFICATION=true
+      - DOCKER_REGISTRY_URL=http://registry:5000
+    depends_on:
+      registry:
+        condition: service_started
